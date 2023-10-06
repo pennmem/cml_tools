@@ -1,0 +1,27 @@
+==Local mount==
+Mounting Rhino allows you to access the Rhino file system as if it were an external drive on your computer.
+
+''Note: This solution only works on OSX''
+
+===Installation===
+mount_rhino is a script that was written to work in conjunction with osxfuse and sshfs to provide a simple interface for mounting rhino
+
+First, download osxfuse and sshfs from here: [https://osxfuse.github.io/]
+
+Second, download the script mount_rhino from here [https://memory.psych.upenn.edu/files/misc/mount_rhino/mount_rhino], and place it in an easy-to-access directory on your local machine.
+
+(Finally, it may be necessary to open a terminal and cd to the folder containing mount_rhino, then type: ''chmod +x mount_rhino'')
+
+===Usage===
+The script will then become a double-clickable application. As with many applications on newer Mac operating systems, the first time you open it, you may need to right-click -> open it instead of double clicking. Follow the prompts that come up (paying attention to whether it is asking for your PC or Rhino password), then drag the volume Rhino to your finder sidebar to make it easily accessible. By default Rhino will be mounted at the path ~/rhino_mount/.
+
+If desired, you can edit the mount_rhino script to hard-code your Rhino username rather than having it prompt you every time. To do this, remove the "read USERNAME" line and replace $USERNAME in the sshfs command with your Rhino username. You can also change the location where Rhino is mounted by altering the LOCAL_RHINO_LOC variable in the file.
+
+===Debugging===
+Sometimes, your mount may disconnect or become corrupted when you log out or when your computer goes into sleep mode. If this happens, first try rerunning the mount_rhino script.
+
+Another solution that doesn't require restarting is unmounting the directory. If you get an error saying the directory is still mounted, force unmount the "unavailable" directory: 
+<code>umount -f <mounted_dir></code>
+More details are [https://github.com/osxfuse/osxfuse/issues/45 here].
+
+If this fails, restarting your computer will fix the issue and you will be able to re-mount Rhino after you restart.
